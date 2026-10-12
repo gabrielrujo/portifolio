@@ -27,13 +27,12 @@ export const profile = {
   // SUBSTITUIR: cidade/estado.
   location: "Brasil · atendimento remoto",
   email: "ujo.gabri.pro@gmail.com",
-  // SUBSTITUIR: número com DDI e DDD, só dígitos (ex.: 5511912345678).
-  whatsapp: "5500000000000",
+  // Número com DDI (55) e DDD, só dígitos.
+  whatsapp: "5531998501209",
   whatsappMessage: "Olá, Gabriel! Vi seu portfólio e quero conversar sobre um site.",
   github: "https://github.com/gabrielrujo",
-  // SUBSTITUIR: seus perfis.
-  linkedin: "https://www.linkedin.com/in/SEU-USUARIO",
-  instagram: "https://www.instagram.com/SEU-USUARIO",
+  linkedin: "https://www.linkedin.com/in/gabrielrujo",
+  instagram: "https://www.instagram.com/_gabrielujo",
 }
 
 export function whatsappUrl(message = profile.whatsappMessage) {
@@ -143,10 +142,11 @@ export const projects = {
       kind: "demo",
       title: "Ateli",
       window: "ateli-five.vercel.app",
-      // SUBSTITUIR: descrição curta do projeto (uma linha), problema e solução.
-      description: "Site para um estúdio de arquitetura e interiores (texto provisório).",
-      problem: "Texto provisório: qual problema este projeto resolve.",
-      solution: "Texto provisório: o que foi construído.",
+      description: "Site para um estúdio de arquitetura e interiores.",
+      problem:
+        "Um estúdio de arquitetura vende pelo olhar: precisa mostrar o portfólio com a mesma qualidade dos projetos e facilitar o primeiro contato de quem quer reformar ou construir.",
+      solution:
+        "Um site editorial com fotos grandes, páginas de projetos, serviços e estúdio, e um botão de “Iniciar projeto” sempre à vista para o visitante pedir orçamento.",
       tags: ["React", "Tailwind CSS"],
       url: "https://ateli-five.vercel.app/",
     },
@@ -435,13 +435,12 @@ export const process = {
 
 export const testimonial = {
   eyebrow: "Depoimento",
-  // SUBSTITUIR: texto real do cliente. Enquanto `placeholder` for true,
-  // a página mostra um aviso de "texto provisório".
-  placeholder: true,
+  // Enquanto `placeholder` for true, a página mostra um aviso de "texto provisório".
+  placeholder: false,
   placeholderLabel: "Texto provisório",
   quote:
-    "O Gabriel entendeu rápido o que o escritório precisava. O site ficou sóbrio, carrega rápido e hoje boa parte dos contatos novos chega pelo botão de WhatsApp.",
-  name: "Nome do cliente",
+    "Gabriel criou o site do meu escritório de advocacia e eu fiquei muito satisfeita com o resultado! Durante todo o processo ele foi atencioso e acolheu meus feedbacks. É um excelente profissional!",
+  name: "Leticia Rodrigues",
   role: "LR Advocacia",
   initials: "LR",
 }
