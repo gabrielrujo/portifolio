@@ -1,0 +1,167 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+    /* Uma única fonte no site todo: JetBrains Mono (títulos, texto, interface e código). */
+    --font-heading: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+    --font-sans: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+    --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+    --color-ring: var(--ring);
+    --color-input: var(--input);
+    --color-border: var(--border);
+    --color-destructive: var(--destructive);
+    --color-accent-foreground: var(--accent-foreground);
+    --color-accent: var(--accent);
+    --color-muted-foreground: var(--muted-foreground);
+    --color-muted: var(--muted);
+    --color-secondary-foreground: var(--secondary-foreground);
+    --color-secondary: var(--secondary);
+    --color-primary-foreground: var(--primary-foreground);
+    --color-primary: var(--primary);
+    --color-popover-foreground: var(--popover-foreground);
+    --color-popover: var(--popover);
+    --color-card-foreground: var(--card-foreground);
+    --color-card: var(--card);
+    --color-foreground: var(--foreground);
+    --color-background: var(--background);
+    /* Azul do acento usado como texto/link: mais profundo no tema claro para passar 4.5:1 */
+    --color-link: var(--link);
+    --color-window: var(--window);
+    --color-titlebar: var(--titlebar);
+    --color-terminal: var(--terminal);
+    --color-terminal-foreground: var(--terminal-foreground);
+    --color-terminal-muted: var(--terminal-muted);
+    --color-light-red: #ff5f57;
+    --color-light-yellow: #febc2e;
+    --color-light-green: #28c840;
+    --radius-sm: calc(var(--radius) * 0.6);
+    --radius-md: calc(var(--radius) * 0.8);
+    --radius-lg: var(--radius);
+    --radius-xl: calc(var(--radius) * 1.4);
+    --radius-2xl: calc(var(--radius) * 1.8);
+    --radius-3xl: calc(var(--radius) * 2.2);
+    --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+/*
+  Paleta: branco/preto + um único acento azul-céu (#4DA3FF).
+  Contrastes verificados: texto 19:1, texto secundário 6.6:1,
+  botão (texto quase preto sobre o azul) 7.2:1, link claro #0B6BCB 5.3:1,
+  link escuro #4DA3FF 7.7:1.
+*/
+:root {
+    --background: #ffffff;
+    --foreground: #0b0d10;
+    --card: #ffffff;
+    --card-foreground: #0b0d10;
+    --popover: #ffffff;
+    --popover-foreground: #0b0d10;
+    --primary: #4da3ff;
+    --primary-foreground: #06121f;
+    --secondary: #f4f5f7;
+    --secondary-foreground: #0b0d10;
+    --muted: #f4f5f7;
+    --muted-foreground: #575d66;
+    --accent: #f0f2f5;
+    --accent-foreground: #0b0d10;
+    --destructive: #c62828;
+    --border: #e4e6ea;
+    --input: #d6d9de;
+    --ring: #0b6bcb;
+    --link: #0b6bcb;
+    --window: #ffffff;
+    --titlebar: #f2f3f5;
+    --terminal: #0b0d10;
+    --terminal-foreground: #d6dbe2;
+    --terminal-muted: #8a929e;
+    --radius: 0.625rem;
+}
+
+.dark {
+    --background: #050608;
+    --foreground: #f5f7fa;
+    --card: #0e1014;
+    --card-foreground: #f5f7fa;
+    --popover: #0e1014;
+    --popover-foreground: #f5f7fa;
+    --primary: #4da3ff;
+    --primary-foreground: #06121f;
+    --secondary: #15181d;
+    --secondary-foreground: #f5f7fa;
+    --muted: #15181d;
+    --muted-foreground: #a1a8b3;
+    --accent: #1a1d23;
+    --accent-foreground: #f5f7fa;
+    --destructive: #ff6b6b;
+    --border: #23272e;
+    --input: #2c313a;
+    --ring: #4da3ff;
+    --link: #4da3ff;
+    --window: #0e1014;
+    --titlebar: #171a1f;
+    --terminal: #000000;
+    --terminal-foreground: #d6dbe2;
+    --terminal-muted: #8a929e;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    @apply scroll-smooth font-sans antialiased;
+    scroll-padding-top: 5rem;
+    color-scheme: light;
+  }
+  html.dark {
+    color-scheme: dark;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  h1, h2, h3, h4 {
+    @apply font-heading text-balance;
+    letter-spacing: -0.015em;
+  }
+  p {
+    @apply text-pretty;
+  }
+  /* Foco visível e com contraste nos dois temas */
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+  }
+  button:not(:disabled), [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+  }
+}
+
+/* ---------- Hero: granulado e faixa de tecnologias ---------- */
+:root {
+  --grain-opacity: 0.05;
+}
+.dark {
+  --grain-opacity: 0.08;
+}
+
+@utility grain {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: var(--grain-opacity);
+}
+.dark .grain {
+  filter: invert(1);
+}
+
+@theme inline {
+  --animate-marquee: marquee 36s linear infinite;
+}
+
+@keyframes marquee {
+  to { transform: translate3d(-50%, 0, 0); }
+}
