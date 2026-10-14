@@ -27,7 +27,7 @@ function CopyEmail() {
 
   return (
     <div className="flex flex-col gap-2">
-      <p className="font-mono text-sm text-muted-foreground">{contact.emailLabel}</p>
+      <p className="font-medium text-sm text-muted-foreground">{contact.emailLabel}</p>
       <div className="flex flex-col items-start gap-3">
         <a
           href={`mailto:${profile.email}`}
@@ -54,7 +54,7 @@ export function Contact() {
       <Container>
         <Reveal className="grid gap-12 rounded-3xl border bg-muted/50 p-6 sm:p-10 lg:grid-cols-12 lg:gap-8 lg:p-14">
           <div className="flex flex-col items-start gap-5 lg:col-span-7">
-            <p className="font-mono text-sm text-link">{contact.eyebrow}</p>
+            <p className="font-medium text-sm text-link">{contact.eyebrow}</p>
             <h2 id="contato-title" className="text-4xl leading-[1.05] font-bold sm:text-5xl">
               {contact.title}
             </h2>

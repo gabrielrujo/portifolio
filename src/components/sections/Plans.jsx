@@ -1,4 +1,4 @@
-import { ArrowUpIcon, CheckIcon, SquareTerminalIcon, WalletIcon } from "lucide-react"
+import { ArrowUpIcon, CheckIcon, SquareTerminalIcon, WalletIcon, WrenchIcon } from "lucide-react"
 
 import { plans, whatsappUrl } from "@/config"
 import { cn } from "@/lib/utils"
@@ -9,6 +9,8 @@ import { WhatsappIcon } from "@/components/site/BrandIcons"
 import { Container } from "@/components/site/Container"
 import { Reveal } from "@/components/site/Reveal"
 import { SectionHeading } from "@/components/site/SectionHeading"
+
+const extraIcons = { terminal: SquareTerminalIcon, wrench: WrenchIcon }
 
 export function Plans() {
   return (
@@ -62,38 +64,48 @@ export function Plans() {
           ))}
         </div>
 
-        <Reveal className="grid gap-5 rounded-2xl border bg-card p-6 sm:p-7 lg:grid-cols-12 lg:items-center lg:gap-8">
-          <div className="flex gap-4 lg:col-span-7">
-            <span className="flex size-11 shrink-0 items-center justify-center rounded-xl border bg-muted text-link">
-              <SquareTerminalIcon className="size-5" aria-hidden="true" />
-            </span>
-            <div className="flex flex-col gap-1.5">
-              <h3 className="text-xl font-semibold">
-                {plans.automation.title} <span className="text-link">{plans.automation.price}</span>
-              </h3>
-              <p className="text-muted-foreground">{plans.automation.text}</p>
-            </div>
-          </div>
-          <div className="flex flex-col gap-3 sm:flex-row lg:col-span-5 lg:justify-end">
-            <Button asChild size="lg" variant="ghost">
-              <a href="#automacoes">
-                {plans.automation.link}
-                <ArrowUpIcon data-icon="inline-end" />
-              </a>
-            </Button>
-            <Button asChild size="lg" variant="outline">
-              <a
-                href={whatsappUrl(`Olá, Gabriel! Quero um orçamento de automação em Python (${plans.automation.price}).`)}
-                target="_blank"
-                rel="noopener noreferrer"
+        <ul className="grid gap-6 lg:grid-cols-2">
+          {plans.extras.map((extra, i) => {
+            const Icon = extraIcons[extra.icon]
+            return (
+              <Reveal
+                as="li"
+                key={extra.id}
+                delay={i * 0.06}
+                className="flex flex-col gap-5 rounded-2xl border bg-card p-6 sm:p-7"
               >
-                <WhatsappIcon className="size-4" data-icon="inline-start" />
-                {plans.automation.cta}
-                <span className="sr-only"> de automação pelo WhatsApp (abre em nova aba)</span>
-              </a>
-            </Button>
-          </div>
-        </Reveal>
+                <div className="flex gap-4">
+                  <span className="flex size-11 shrink-0 items-center justify-center rounded-xl border bg-muted text-link">
+                    <Icon className="size-5" aria-hidden="true" />
+                  </span>
+                  <div className="flex flex-col gap-1.5">
+                    <h3 className="text-xl font-semibold">
+                      {extra.title} <span className="text-link">{extra.price}</span>
+                    </h3>
+                    <p className="text-muted-foreground">{extra.text}</p>
+                  </div>
+                </div>
+                <div className="mt-auto flex flex-col gap-3 sm:flex-row sm:justify-end">
+                  {extra.link && (
+                    <Button asChild size="lg" variant="ghost">
+                      <a href={extra.link.href}>
+                        {extra.link.label}
+                        <ArrowUpIcon data-icon="inline-end" />
+                      </a>
+                    </Button>
+                  )}
+                  <Button asChild size="lg" variant="outline">
+                    <a href={whatsappUrl(extra.message)} target="_blank" rel="noopener noreferrer">
+                      <WhatsappIcon className="size-4" data-icon="inline-start" />
+                      {extra.cta}
+                      <span className="sr-only"> ({extra.title}) pelo WhatsApp (abre em nova aba)</span>
+                    </a>
+                  </Button>
+                </div>
+              </Reveal>
+            )
+          })}
+        </ul>
       </Container>
     </section>
   )

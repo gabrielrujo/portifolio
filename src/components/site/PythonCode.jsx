@@ -26,7 +26,7 @@ function highlight(line) {
 export function PythonCode({ code, command, output, large, label = "Código Python de exemplo" }) {
   const lines = code.split("\n")
   return (
-    <div className={cn("font-mono text-terminal-foreground [font-variant-ligatures:none]", large ? "p-6 text-base sm:p-10 sm:text-lg" : "p-4 text-[0.8rem] sm:p-5 sm:text-sm")}>
+    <div className={cn("font-mono text-terminal-foreground [font-variant-ligatures:none]", large ? "p-6 text-base sm:p-10 sm:text-lg" : "p-4 text-[13px] sm:p-5 sm:text-sm")}>
       <pre tabIndex={0} aria-label={label} className="overflow-x-auto leading-relaxed focus-visible:outline-offset-4">
         <code>
           {lines.map((line, i) => (

@@ -37,7 +37,7 @@ const socials = [
 
 function StackMarquee() {
   const items = hero.stack.map((name) => (
-    <li key={name} className="flex shrink-0 items-center gap-2.5 font-mono text-sm text-muted-foreground">
+    <li key={name} className="flex shrink-0 items-center gap-2.5 font-medium text-sm text-muted-foreground">
       <TechIcon name={name} className="size-5 shrink-0" />
       {name}
     </li>

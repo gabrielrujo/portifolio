@@ -8,7 +8,7 @@ export function Testimonial() {
     <section aria-labelledby="depoimento-title" className="border-t py-20 sm:py-28">
       <Container className="grid gap-8 lg:grid-cols-12 lg:gap-8">
         <Reveal className="flex flex-col items-start gap-3 lg:col-span-3">
-          <h2 id="depoimento-title" className="font-mono text-sm font-normal tracking-normal text-link">
+          <h2 id="depoimento-title" className="text-sm font-medium tracking-normal text-link">
             {testimonial.eyebrow}
           </h2>
           {testimonial.placeholder && (

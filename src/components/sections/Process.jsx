@@ -23,7 +23,7 @@ export function Process() {
               />
               <span
                 aria-hidden="true"
-                className="relative z-10 flex size-11 shrink-0 items-center justify-center rounded-full border bg-background font-mono text-sm font-medium text-link"
+                className="relative z-10 flex size-11 shrink-0 items-center justify-center rounded-full border bg-background text-sm font-medium text-link"
               >
                 {String(i + 1).padStart(2, "0")}
               </span>

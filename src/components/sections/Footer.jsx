@@ -6,7 +6,7 @@ import { Container } from "@/components/site/Container"
 export function Footer() {
   const year = new Date().getFullYear()
   return (
-    <footer className="border-t pt-10 pb-28 md:pb-10">
+    <footer className="border-t pt-10 pb-[calc(6.5rem+env(safe-area-inset-bottom))] md:pb-10">
       <Container className="flex flex-col gap-8">
         <div className="flex flex-col justify-between gap-6 md:flex-row md:items-center">
           <p className="font-heading font-semibold">{profile.name}</p>

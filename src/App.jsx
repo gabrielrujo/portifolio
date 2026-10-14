@@ -1,3 +1,4 @@
+import { useState } from "react"
 import { MotionConfig } from "motion/react"
 
 import { ctaBands } from "@/config"
@@ -16,6 +17,7 @@ import { Services } from "@/components/sections/Services"
 import { Testimonial } from "@/components/sections/Testimonial"
 
 export default function App() {
+  const [menuOpen, setMenuOpen] = useState(false)
   return (
     <MotionConfig reducedMotion="user">
       <a
@@ -24,7 +26,7 @@ export default function App() {
       >
         Pular para o conteúdo
       </a>
-      <Navbar />
+      <Navbar menuOpen={menuOpen} onMenuOpenChange={setMenuOpen} />
       <main id="conteudo">
         <Hero />
         <Projects />
@@ -42,7 +44,7 @@ export default function App() {
         <Contact />
       </main>
       <Footer />
-      <FloatingWhatsapp />
+      <FloatingWhatsapp hidden={menuOpen} />
     </MotionConfig>
   )
 }

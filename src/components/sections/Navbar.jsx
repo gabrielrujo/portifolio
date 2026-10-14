@@ -21,7 +21,7 @@ function useScrolled(threshold = 24) {
 
 // No topo, a barra é transparente sobre o hero. Ao rolar, vira uma barra flutuante
 // arredondada, com borda sutil e fundo translúcido desfocado.
-export function Navbar() {
+export function Navbar({ menuOpen, onMenuOpenChange }) {
   const scrolled = useScrolled()
   return (
     <header className="fixed inset-x-0 top-0 z-40 px-3 sm:px-4">
@@ -66,7 +66,7 @@ export function Navbar() {
             </a>
           </Button>
 
-          <Sheet>
+          <Sheet open={menuOpen} onOpenChange={onMenuOpenChange}>
             <SheetTrigger asChild>
               <Button variant="outline" size="icon-lg" className="xl:hidden" aria-label={nav.menuLabel}>
                 <MenuIcon />

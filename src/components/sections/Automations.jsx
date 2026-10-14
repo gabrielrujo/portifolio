@@ -59,7 +59,7 @@ function LogLine({ text, last }) {
 
 function Terminal({ item, run }) {
   return (
-    <div className="h-64 overflow-hidden p-4 font-mono text-[0.8rem] leading-relaxed text-terminal-foreground [font-variant-ligatures:none] sm:h-72 sm:p-5 sm:text-sm">
+    <div className="min-h-52 p-4 font-mono text-[13px] leading-relaxed break-words text-terminal-foreground [font-variant-ligatures:none] sm:min-h-64 sm:p-5 sm:text-sm">
       <p>
         <span className="text-primary">$ </span>
         {run.typed}
@@ -102,7 +102,7 @@ function ChartPreview({ data, done }) {
       </div>
       <div className="-mt-3 flex gap-3" aria-hidden="true">
         {data.bars.map((b) => (
-          <span key={b.label} className="flex-1 text-center font-mono text-xs text-muted-foreground">
+          <span key={b.label} className="flex-1 text-center text-xs text-muted-foreground tabular-nums">
             {b.label}
           </span>
         ))}
@@ -112,7 +112,7 @@ function ChartPreview({ data, done }) {
         <ol className="flex flex-col gap-1.5 text-sm">
           {data.top.map((name, i) => (
             <li key={name} className="flex items-center gap-2.5">
-              <span className="flex size-5 items-center justify-center rounded-md bg-muted font-mono text-xs text-muted-foreground">
+              <span className="flex size-5 items-center justify-center rounded-md bg-muted text-xs text-muted-foreground tabular-nums">
                 {i + 1}
               </span>
               {name}
@@ -135,7 +135,7 @@ function QuotePreview({ data }) {
           </span>
           <span className="font-heading text-sm font-bold">{data.company}</span>
         </div>
-        <span className="rounded bg-[#c62828] px-1.5 py-0.5 font-mono text-[0.6rem] font-medium text-white">PDF</span>
+        <span className="rounded bg-[#c62828] px-1.5 py-0.5 text-[0.6rem] font-semibold text-white">PDF</span>
       </div>
       <div className="h-1 rounded-full bg-primary" />
       <div className="flex justify-between gap-2">
@@ -151,13 +151,13 @@ function QuotePreview({ data }) {
         {data.items.map((it) => (
           <li key={it.name} className="flex justify-between gap-2 border-b border-[#e4e6ea] py-1.5">
             <span>{it.name}</span>
-            <span className="font-mono text-[0.75rem]">{it.value}</span>
+            <span className="tabular-nums">{it.value}</span>
           </li>
         ))}
       </ul>
       <p className="flex justify-between font-semibold">
         <span>{data.totalLabel}</span>
-        <span className="font-mono">{data.total}</span>
+        <span className="tabular-nums">{data.total}</span>
       </p>
     </div>
   )
@@ -184,8 +184,8 @@ function StockPreview({ data }) {
                 <th scope="row" className="px-1 py-2.5 font-normal">
                   {r.name}
                 </th>
-                <td className={cn("px-1 py-2.5 text-right font-mono", low && "font-semibold text-destructive")}>{r.stock}</td>
-                <td className="px-1 py-2.5 text-right font-mono text-muted-foreground">{r.min}</td>
+                <td className={cn("px-1 py-2.5 text-right tabular-nums", low && "font-semibold text-destructive")}>{r.stock}</td>
+                <td className="px-1 py-2.5 text-right text-muted-foreground tabular-nums">{r.min}</td>
                 <td className="px-1 py-2.5">
                   {low ? (
                     <Badge variant="destructive" className="h-6 px-2">
@@ -244,7 +244,7 @@ function Showcase({ item, started, reduceMotion, onReplay }) {
             </div>
           </MacWindow>
           <div className="flex items-center justify-between gap-3">
-            <p className="font-mono text-xs text-muted-foreground">{item.file}</p>
+            <p className="min-w-0 truncate text-xs text-muted-foreground">{item.file}</p>
             <Button variant="ghost" size="sm" onClick={onReplay} disabled={!run.done} className="h-10">
               <RotateCcwIcon data-icon="inline-start" />
               {automations.replay}
@@ -252,9 +252,9 @@ function Showcase({ item, started, reduceMotion, onReplay }) {
           </div>
         </div>
 
-        <div className="flex min-w-0 flex-col gap-3 rounded-2xl border bg-card p-5 lg:col-span-5">
+        <div className="flex min-w-0 flex-col gap-3 rounded-2xl border bg-card p-4 sm:p-5 lg:col-span-5">
           <div className="flex items-center justify-between gap-3">
-            <p className="font-mono text-xs text-link">{automations.previewLabel}</p>
+            <p className="text-xs font-medium text-link">{automations.previewLabel}</p>
             {!run.done && (
               <p className="text-xs text-muted-foreground" aria-hidden="true">
                 {automations.waiting}
@@ -315,17 +315,22 @@ export function Automations() {
 
         <Reveal>
           <Tabs value={active} onValueChange={setActive} className="gap-6">
-            <TabsList aria-label={automations.tabsLabel} className="grid h-auto w-full grid-cols-3 sm:inline-flex sm:w-fit">
+            {/* Celular: uma linha rolável na horizontal, rótulos curtos. Desktop: rótulos completos. */}
+            <TabsList
+              aria-label={automations.tabsLabel}
+              className="w-full max-w-full justify-start group-data-horizontal/tabs:h-11 overflow-x-auto overscroll-x-contain [scrollbar-width:none] sm:w-fit [&::-webkit-scrollbar]:hidden"
+            >
               {automations.items.map((item) => {
                 const Icon = icons[item.icon]
                 return (
                   <TabsTrigger
                     key={item.id}
                     value={item.id}
-                    className="h-auto min-h-11 flex-col gap-1 px-2 py-2 text-center text-xs whitespace-normal sm:flex-row sm:whitespace-nowrap sm:gap-2 sm:px-4 sm:text-sm"
+                    className="h-full flex-[1_0_auto] gap-1.5 px-2.5 sm:flex-none sm:gap-2 sm:px-4"
                   >
                     <Icon aria-hidden="true" />
-                    {item.label}
+                    <span className="sm:hidden">{item.shortLabel}</span>
+                    <span className="hidden sm:inline">{item.label}</span>
                   </TabsTrigger>
                 )
               })}
@@ -335,7 +340,7 @@ export function Automations() {
               {automations.items.map((item) => (
                 // O painel tem conteúdo focável, então não precisa ser uma parada de Tab.
                 <TabsContent key={item.id} value={item.id} tabIndex={-1} className="flex flex-col gap-6 text-base">
-                  <p className="max-w-2xl text-lg text-muted-foreground">{item.summary}</p>
+                  <p className="max-w-2xl text-base leading-[1.6] text-muted-foreground sm:text-lg">{item.summary}</p>
                   <Showcase
                     key={`${item.id}-${run}`}
                     item={item}

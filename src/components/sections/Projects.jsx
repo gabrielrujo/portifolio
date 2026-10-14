@@ -38,7 +38,7 @@ function Tags({ tags }) {
   return (
     <ul className="flex flex-wrap gap-1.5" aria-label="Tecnologias">
       {tags.map((t) => (
-        <li key={t} className="rounded-md border bg-background px-2 py-0.5 font-mono text-xs text-muted-foreground">
+        <li key={t} className="rounded-md border bg-background px-2 py-0.5 font-medium text-xs text-muted-foreground">
           {t}
         </li>
       ))}
@@ -379,7 +379,7 @@ export function Projects() {
     <section id="projetos" aria-labelledby="projetos-title" className="py-20 sm:py-28">
       <Container className="flex flex-col gap-12 sm:gap-16">
         <Reveal className="flex flex-col items-center gap-4 text-center">
-          <p className="rounded-full border bg-muted px-3 py-1 font-mono text-sm text-link">{projects.eyebrow}</p>
+          <p className="rounded-full border bg-muted px-3 py-1 font-medium text-sm text-link">{projects.eyebrow}</p>
           <h2 id="projetos-title" className="text-4xl leading-[1.05] font-bold sm:text-5xl lg:text-6xl">
             {projects.title}
           </h2>
