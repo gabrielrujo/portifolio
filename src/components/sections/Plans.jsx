@@ -21,7 +21,12 @@ export function Plans() {
         <div className="grid gap-6 lg:grid-cols-3 lg:items-stretch">
           {plans.items.map((plan, i) => (
             <Reveal key={plan.id} delay={i * 0.06} className="flex">
-              <Card className={cn("w-full gap-6 rounded-2xl py-7", plan.popular ? "ring-2 ring-primary" : "")}>
+              <Card
+                className={cn(
+                  "w-full gap-6 rounded-2xl py-7 transition-all duration-300 ease-out hover:scale-[1.03] hover:ring-2 hover:ring-primary hover:shadow-xl hover:shadow-primary/20 motion-reduce:hover:scale-100",
+                  plan.popular ? "ring-2 ring-primary" : ""
+                )}
+              >
                 <CardHeader className="px-6">
                   <div className="flex items-center justify-between gap-2">
                     <CardTitle className="text-xl font-semibold">{plan.name}</CardTitle>
@@ -72,35 +77,38 @@ export function Plans() {
                 as="li"
                 key={extra.id}
                 delay={i * 0.06}
-                className="flex flex-col gap-5 rounded-2xl border bg-card p-6 sm:p-7"
+                className="flex"
               >
-                <div className="flex gap-4">
-                  <span className="flex size-11 shrink-0 items-center justify-center rounded-xl border bg-muted text-link">
-                    <Icon className="size-5" aria-hidden="true" />
-                  </span>
-                  <div className="flex flex-col gap-1.5">
-                    <h3 className="text-xl font-semibold">
-                      {extra.title} <span className="text-link">{extra.price}</span>
-                    </h3>
-                    <p className="text-muted-foreground">{extra.text}</p>
+                {/* Hover num div interno: o Reveal controla o transform do li via motion */}
+                <div className="flex w-full flex-col gap-5 rounded-2xl border bg-card p-6 sm:p-7 transition-all duration-300 ease-out hover:scale-[1.03] hover:ring-2 hover:ring-primary hover:shadow-xl hover:shadow-primary/20 motion-reduce:hover:scale-100">
+                  <div className="flex gap-4">
+                    <span className="flex size-11 shrink-0 items-center justify-center rounded-xl border bg-muted text-link">
+                      <Icon className="size-5" aria-hidden="true" />
+                    </span>
+                    <div className="flex flex-col gap-1.5">
+                      <h3 className="text-xl font-semibold">
+                        {extra.title} <span className="text-link">{extra.price}</span>
+                      </h3>
+                      <p className="text-muted-foreground">{extra.text}</p>
+                    </div>
                   </div>
-                </div>
-                <div className="mt-auto flex flex-col gap-3 sm:flex-row sm:justify-end">
-                  {extra.link && (
-                    <Button asChild size="lg" variant="ghost">
-                      <a href={extra.link.href}>
-                        {extra.link.label}
-                        <ArrowUpIcon data-icon="inline-end" />
+                  <div className="mt-auto flex flex-col gap-3 sm:flex-row sm:justify-end">
+                    {extra.link && (
+                      <Button asChild size="lg" variant="ghost">
+                        <a href={extra.link.href}>
+                          {extra.link.label}
+                          <ArrowUpIcon data-icon="inline-end" />
+                        </a>
+                      </Button>
+                    )}
+                    <Button asChild size="lg" variant="outline">
+                      <a href={whatsappUrl(extra.message)} target="_blank" rel="noopener noreferrer">
+                        <WhatsappIcon className="size-4" data-icon="inline-start" />
+                        {extra.cta}
+                        <span className="sr-only"> ({extra.title}) pelo WhatsApp (abre em nova aba)</span>
                       </a>
                     </Button>
-                  )}
-                  <Button asChild size="lg" variant="outline">
-                    <a href={whatsappUrl(extra.message)} target="_blank" rel="noopener noreferrer">
-                      <WhatsappIcon className="size-4" data-icon="inline-start" />
-                      {extra.cta}
-                      <span className="sr-only"> ({extra.title}) pelo WhatsApp (abre em nova aba)</span>
-                    </a>
-                  </Button>
+                  </div>
                 </div>
               </Reveal>
             )
